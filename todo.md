@@ -11,33 +11,33 @@
 - [ ] Create shared Notion/Drive space for runbooks and test fixtures
 
 ## 1) Monorepo and tooling
-- [ ] Initialize pnpm workspace: `packages/shared-schemas`, `packages/shared-ev`, `services/api`, `apps/web`
-- [ ] Add ESLint, Prettier, Vitest, tsconfig base with path aliases
-- [ ] Add root scripts: `build`, `test`, `lint`, `format`, `typecheck`
+- [x] Initialize pnpm workspace: `packages/shared-schemas`, `packages/shared-ev`, `services/api`, `apps/web`
+- [x] Add ESLint, Prettier, Vitest, tsconfig base with path aliases
+- [x] Add root scripts: `build`, `test`, `lint`, `format`, `typecheck`
 - [ ] CI placeholder (GitHub Actions optional post‑MVP)
-- [ ] Root README with local dev instructions
+- [x] Root README with local dev instructions
 
 ## 2) Shared schemas (TypeScript + zod)
-- [ ] Define enums: ScoreBand, ProductType, Ownership, Status, PaymentStatus
-- [ ] Define Account, Inquiry, User, and meta fields per spec
-- [ ] Define AnalyzeInput and AnalyzeOutput schemas
-- [ ] Export types from zod
-- [ ] Unit tests: valid and invalid payloads
+- [x] Define enums: ScoreBand, ProductType, Ownership, Status, PaymentStatus
+- [x] Define Account, Inquiry, User, and meta fields per spec
+- [x] Define AnalyzeInput and AnalyzeOutput schemas
+- [x] Export types from zod
+- [x] Unit tests: valid and invalid payloads
 
 ## 3) EV core library (`packages/shared-ev`)
-- [ ] Helpers: `clampAPR`, `utilBracket`, `minPayment`
-- [ ] APR estimate by product + score band; clamp 9.99–34.99
-- [ ] Odds tables: APR reduction and balance transfer; clamps
-- [ ] ΔAPR table by score band
-- [ ] EV funcs: late fee, penalty APR, APR reduction, balance transfer
-- [ ] Pay‑down simulator: monthly approximation; avalanche vs baseline B
-- [ ] Scenario bounds (low/high via tier down/up)
-- [ ] Unit tests: edges, brackets, example numerics
+- [x] Helpers: `clampAPR`, `utilBracket`, `minPayment`
+- [x] APR estimate by product + score band; clamp 9.99–34.99
+ - [x] Odds tables: APR reduction and balance transfer; clamps
+ - [x] ΔAPR table by score band
+ - [x] EV funcs: late fee, penalty APR, APR reduction, balance transfer
+ - [x] Pay‑down simulator: monthly approximation; avalanche vs baseline B
+ - [x] Scenario bounds (low/high via tier down/up)
+ - [x] Unit tests: edges, brackets, example numerics
 
 ## 4) Backend scaffolding (AWS SAM + Lambda)
-- [ ] SAM template: REST `POST /analyze`, `POST /events`, `POST /items`, health
-- [ ] Handler skeletons in TypeScript with zod validation
-- [ ] Structured JSON error format and codes
+- [x] SAM template: REST `POST /analyze`, `POST /events`, `POST /items`, health
+- [x] Handler skeletons in TypeScript with zod validation
+- [x] Structured JSON error format and codes
 - [ ] Local SAM run script
 
 ## 5) Postgres and persistence
@@ -50,53 +50,53 @@
 
 ## 6) API implementations
 ### `/analyze`
-- [ ] Validate input with zod
+- [x] Validate input with zod
 - [ ] Persist structured fields
 - [ ] Deduplicate tradelines, compute conflicts, latest‑wins
-- [ ] Apply utilization and APR logic
-- [ ] Compute EVs and warnings
-- [ ] Enforce per‑user daily cap
-- [ ] Unit tests: success, cap exceeded, invalid, partial coverage
+- [x] Apply utilization and APR logic
+- [x] Compute EVs and warnings
+- [x] Enforce per‑user daily cap
+- [x] Unit tests: success, cap exceeded, invalid, partial coverage
 
 ### `/events`
-- [ ] Implement consent and outcome insert
-- [ ] Return `event_id`, timestamp
-- [ ] Unit tests for both types
+- [x] Implement consent and outcome insert
+- [x] Return `event_id`, timestamp
+- [x] Unit tests for both types
 
 ### `/items`
-- [ ] Save/list/delete handlers, stale flag
-- [ ] Enforce caps, size limits
-- [ ] Unit tests
+- [x] Save/list/delete handlers, stale flag
+- [x] Enforce caps, size limits
+- [x] Unit tests
 
 ## 7) Quotas and rate limits
 - [ ] API Gateway throttles per route
-- [ ] Per‑user caps (3 analyses/day, 10 scripts/day, 3 exports/day)
+- [x] Per‑user caps (3 analyses/day, 10 scripts/day, 3 exports/day)
 - [ ] Per‑IP throttles (uploads, analyze, scripts, exports)
 - [ ] WAF bot control
 - [ ] Tests for cap increment/reset
 
 ## 8) Frontend scaffolding
-- [ ] Tailwind setup; dark mode
-- [ ] Layout shell, routes `/`, `/upload`, `/review`, `/actions`, `/saved`, `/tos`, `/privacy`, `/auth/callback`
+- [x] Tailwind setup; dark mode
+- [x] Layout shell, routes `/`, `/upload`, `/review`, `/actions`, `/saved`, `/tos`, `/privacy`, `/auth/callback`
 - [ ] Base components
-- [ ] Landing page TOS gate
-- [ ] Upload bureau picker + validation
+- [x] Landing page TOS gate
+- [x] Upload bureau picker + validation
 - [ ] Unsaved changes warning
-- [ ] Unit tests for upload/TOS
+- [x] Unit tests for upload/TOS
 
 ## 9) Auth (Cognito Hosted UI)
 - [ ] Configure pool, IdPs, callback
-- [ ] PKCE login flow
-- [ ] In‑memory tokens, 60‑min expiry
-- [ ] Tests for token parsing, no localStorage
+- [x] PKCE login flow
+- [x] In-memory tokens, 60‑min expiry
+- [x] Tests for token parsing, no localStorage
 
 ## 10) Client parsing
-- [ ] pdf.js text extraction
-- [ ] Label synonyms, grammars
-- [ ] Equifax mapper v1
-- [ ] Confidence metrics
-- [ ] Manual review gate + form
-- [ ] Tests with text fixtures
+- [x] pdf.js text extraction
+- [x] Label synonyms, grammars
+- [x] Equifax mapper v1
+- [x] Confidence metrics
+- [x] Manual review gate + form
+- [x] Tests with text fixtures
 
 ## 11) Dedup + conflicts
 - [ ] Auto‑merge rule

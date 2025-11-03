@@ -1,0 +1,14 @@
+Accounts Summary
+Account Name: Sample Card
+Account Type: Revolving
+Ownership: Individual
+Account Status: Open
+Current Balance: $1,200
+
+Account Name: Mystery Card
+Account Type: Revolving
+Ownership: Joint
+Account Status: Current
+
+Inquiries
+Inquiry: Lender X

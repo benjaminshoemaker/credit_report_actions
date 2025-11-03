@@ -1,0 +1,14 @@
+{
+  "account_name": ["account name", "creditor", "creditor name"],
+  "account_type": ["account type", "type"],
+  "ownership": ["ownership", "responsibility"],
+  "status": ["status", "account status"],
+  "balance": ["balance", "current balance", "present balance"],
+  "credit_limit": ["credit limit", "limit", "credit line"],
+  "high_credit": ["high credit", "highest balance"],
+  "open_date": ["date opened", "opened", "open date"],
+  "reported_date": ["date reported", "reported"],
+  "inquiry_date": ["date", "inquiry date"],
+  "inquiry_creditor": ["creditor", "company", "business"],
+  "inquiry_type": ["type"]
+}

@@ -1,0 +1,61 @@
+{
+  "accounts": [
+    {
+      "name": "Prime Bank Visa",
+      "rawLines": [],
+      "balance": 1200,
+      "creditLimit": 5000,
+      "highCredit": 5200,
+      "status": "open",
+      "ownership": "individual",
+      "openDate": "2018-06",
+      "reportedDate": "2024-02",
+      "bureau": "equifax"
+    },
+    {
+      "name": "Prime Bank Visa",
+      "rawLines": [],
+      "balance": 1300,
+      "creditLimit": 4800,
+      "highCredit": 5200,
+      "status": "open",
+      "ownership": "joint",
+      "openDate": "2018-06",
+      "reportedDate": "2024-03",
+      "bureau": "transunion"
+    },
+    {
+      "name": "Metro Line Credit",
+      "rawLines": [],
+      "balance": 2000,
+      "creditLimit": 4000,
+      "status": "open",
+      "ownership": "individual",
+      "openDate": "2019-01",
+      "reportedDate": "2024-01",
+      "bureau": "equifax"
+    },
+    {
+      "name": "Metro Line Credit",
+      "rawLines": [],
+      "balance": 2100,
+      "creditLimit": 3900,
+      "status": "open",
+      "ownership": "individual",
+      "openDate": "2019-01",
+      "reportedDate": "2024-01",
+      "bureau": "experian"
+    },
+    {
+      "name": "Store Card AU",
+      "rawLines": [],
+      "balance": 350,
+      "creditLimit": 1500,
+      "status": "open",
+      "ownership": "authorized_user",
+      "openDate": "2020-09",
+      "reportedDate": "2024-02",
+      "bureau": "experian"
+    }
+  ]
+}

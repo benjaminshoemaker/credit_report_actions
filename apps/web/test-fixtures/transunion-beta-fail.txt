@@ -1,0 +1,15 @@
+Account Name: Prime Rewards Plus
+Account Type: Revolving
+Balance: $1,800
+Status: Open
+Ownership: Individual
+
+Account Name: Travel Elite Card
+Account Type: Revolving
+Balance: $2,200
+Status: Current
+Ownership: Joint
+
+Inquiries
+Creditor: TransUnion Inquiry
+Date: 2024-03

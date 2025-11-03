@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:16
+    ports:
+      - '55432:5432'
+    environment:
+      POSTGRES_DB: aprcut_test
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 2s
+      timeout: 2s
+      retries: 10
+    tmpfs:
+      - /var/lib/postgresql/data

@@ -1,0 +1,184 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: APRcut API Service
+
+Globals:
+  Function:
+    Runtime: nodejs18.x
+    Timeout: 10
+    MemorySize: 128
+    Architectures:
+      - arm64
+
+Parameters:
+  RdsInstanceIdentifier:
+    Type: String
+    Default: ''
+    Description: Optional RDS instance identifier for CPU utilization alarms.
+
+Conditions:
+  HasRdsInstance: !Not [!Equals [!Ref RdsInstanceIdentifier, '']]
+
+Resources:
+  ApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      MethodSettings:
+        - HttpMethod: POST
+          ResourcePath: /analyze
+          ThrottlingBurstLimit: 10
+          ThrottlingRateLimit: 20
+        - HttpMethod: POST
+          ResourcePath: /events
+          ThrottlingBurstLimit: 15
+          ThrottlingRateLimit: 30
+        - HttpMethod: POST
+          ResourcePath: /items
+          ThrottlingBurstLimit: 15
+          ThrottlingRateLimit: 30
+        - HttpMethod: GET
+          ResourcePath: /items
+          ThrottlingBurstLimit: 25
+          ThrottlingRateLimit: 50
+        - HttpMethod: DELETE
+          ResourcePath: /items/{itemId}
+          ThrottlingBurstLimit: 10
+          ThrottlingRateLimit: 20
+
+  AnalyzeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: dist
+      Handler: handlers/analyze.handler
+      Description: Validates input and returns placeholder EV output.
+      Events:
+        AnalyzePost:
+          Type: Api
+          Properties:
+            Path: /analyze
+            Method: post
+            RestApiId: !Ref ApiGateway
+
+  EventsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: dist
+      Handler: handlers/events.handler
+      Description: Handles consent and outcome events (stub).
+      Events:
+        EventsPost:
+          Type: Api
+          Properties:
+            Path: /events
+            Method: post
+            RestApiId: !Ref ApiGateway
+
+  ItemsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: dist
+      Handler: handlers/items.handler
+      Description: Saved items CRUD (stubs).
+      Events:
+        ItemsPost:
+          Type: Api
+          Properties:
+            Path: /items
+            Method: post
+            RestApiId: !Ref ApiGateway
+        ItemsGet:
+          Type: Api
+          Properties:
+            Path: /items
+            Method: get
+            RestApiId: !Ref ApiGateway
+        ItemsDelete:
+          Type: Api
+          Properties:
+            Path: /items/{itemId}
+            Method: delete
+            RestApiId: !Ref ApiGateway
+
+  ApiGateway5xxAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub '${AWS::StackName}-api-5xx'
+      ComparisonOperator: GreaterThanThreshold
+      EvaluationPeriods: 1
+      MetricName: 5XXError
+      Namespace: AWS/ApiGateway
+      Period: 300
+      Statistic: Sum
+      Threshold: 5
+      TreatMissingData: notBreaching
+      Dimensions:
+        - Name: ApiId
+          Value: !Ref ApiGateway
+        - Name: Stage
+          Value: Prod
+
+  AnalyzeLambdaErrorAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub '${AWS::StackName}-analyze-errors'
+      ComparisonOperator: GreaterThanThreshold
+      EvaluationPeriods: 1
+      MetricName: Errors
+      Namespace: AWS/Lambda
+      Period: 300
+      Statistic: Sum
+      Threshold: 1
+      TreatMissingData: notBreaching
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref AnalyzeFunction
+
+  EventsLambdaErrorAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub '${AWS::StackName}-events-errors'
+      ComparisonOperator: GreaterThanThreshold
+      EvaluationPeriods: 1
+      MetricName: Errors
+      Namespace: AWS/Lambda
+      Period: 300
+      Statistic: Sum
+      Threshold: 1
+      TreatMissingData: notBreaching
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref EventsFunction
+
+  ItemsLambdaErrorAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub '${AWS::StackName}-items-errors'
+      ComparisonOperator: GreaterThanThreshold
+      EvaluationPeriods: 1
+      MetricName: Errors
+      Namespace: AWS/Lambda
+      Period: 300
+      Statistic: Sum
+      Threshold: 1
+      TreatMissingData: notBreaching
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref ItemsFunction
+
+  RdsCpuAlarm:
+    Condition: HasRdsInstance
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub '${AWS::StackName}-rds-cpu'
+      ComparisonOperator: GreaterThanThreshold
+      EvaluationPeriods: 1
+      MetricName: CPUUtilization
+      Namespace: AWS/RDS
+      Period: 300
+      Statistic: Average
+      Threshold: 70
+      TreatMissingData: notBreaching
+      Dimensions:
+        - Name: DBInstanceIdentifier
+          Value: !Ref RdsInstanceIdentifier

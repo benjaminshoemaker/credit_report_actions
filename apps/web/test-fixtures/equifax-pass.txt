@@ -1,0 +1,29 @@
+Accounts Summary
+Account Name: Chase Freedom
+Account Type: Revolving
+Ownership: Individual
+Account Status: Open
+Current Balance: $2,450
+Credit Limit: $5,000
+Highest Balance: $5,200
+Date Opened: 2019-04
+Date Reported: 2024-01
+
+Account Name: Citi Custom Cash
+Account Type: Revolving
+Ownership: Joint
+Status: Current
+Present Balance: $1,200
+Limit: $4,500
+High Credit: $4,800
+Opened: May 2020
+Reported: Jan 2024
+
+Inquiries
+Inquiry: Capital One Bank
+Date: 2024-02
+Type: Hard Pull
+
+Inquiry: American Express
+Inquiry Date: 2023-11
+Type: Soft Pull

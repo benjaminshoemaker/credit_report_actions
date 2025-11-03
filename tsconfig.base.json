@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "baseUrl": ".",
+    "paths": {
+      "@shared-schemas": ["packages/shared-schemas/src/index.ts"],
+      "@shared-schemas/*": ["packages/shared-schemas/src/*"],
+      "@shared-ev": ["packages/shared-ev/src/index.ts"],
+      "@shared-ev/*": ["packages/shared-ev/src/*"]
+    }
+  },
+  "include": []
+}

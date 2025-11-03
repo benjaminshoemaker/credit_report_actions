@@ -1,0 +1,25 @@
+{
+  "name": "@aprcut/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "dev": "pnpm exec sam local start-api",
+    "migrate": "node dist/run-migrations.js"
+  },
+  "dependencies": {
+    "@aprcut/shared-ev": "workspace:*",
+    "@aprcut/shared-schemas": "workspace:*",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.119",
+    "@types/pg": "^8.15.6"
+  }
+}
