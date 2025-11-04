@@ -17,6 +17,13 @@
 - `services/api` – AWS Lambda handlers and SAM infrastructure.
 - `apps/web` – Vite + React + Tailwind single-page app.
 
+## Current Status
+- Shared zod schemas and validation tests ship from `packages/shared-schemas`.
+- The EV core (`packages/shared-ev`) covers APR clamps, odds tables, paydown simulation, and scenario bounds.
+- `/analyze`, `/events`, and `/items` handlers integrate EV planning plus per-user usage caps in `services/api`.
+- Usage caps persist to the `usage_caps` table with optimistic updates.
+- The web app includes Tailwind layout, upload + TOS flows, pdf text extraction, and label grammar helpers with route tests.
+
 ## Common Commands
 Run these from the repository root:
 - `pnpm -w build` – build every package in dependency order.

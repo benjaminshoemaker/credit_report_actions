@@ -20,3 +20,10 @@ After finishing any code change, review `todo.md` and check off the items covere
 
 ## Security & Configuration Tips
 Never commit AWS credentials, OpenAI keys, or sample credit data. Store secrets in SSM Parameter Store and mirror required variables in `.env.example`. Any change touching consent flows or disclosure copy must note the new version in `services/api` events handling.
+
+## Current Implementation Snapshot
+- Shared zod schemas, type exports, and validation tests live under `packages/shared-schemas`.
+- The EV engine in `packages/shared-ev` includes APR clamps, odds tables, scenario bounds, and paydown simulation with comprehensive tests.
+- `/analyze` currently clamps utilization, generates EV-driven action plans, and enforces per-user daily caps alongside `/events` and `/items` handlers.
+- Usage caps for analyses, scripts, and exports are persisted via `usage_caps` with optimistic locking helpers.
+- The web app ships Tailwind-based layout, TOS gating, upload flows, and pdf/label parsing utilities backed by route-level tests.
